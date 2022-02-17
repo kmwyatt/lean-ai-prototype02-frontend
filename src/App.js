@@ -1,27 +1,24 @@
 // @ts-check
 
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Footer from './components/Footer/Footer'
+import Header from './components/Header/Header'
+import IntroPage from './components/IntroPage/IntroPage'
+import MainPage from './components/MainPage/MainPage'
+import NoticePage from './components/NoticePage/NoticePage'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route path="/" component={Header} />
+      <Switch>
+        <Route exact path="/" component={IntroPage} />
+        <Route exact path="/main" component={MainPage} />
+        <Route exact path="/notice" component={NoticePage} />
+      </Switch>
+      <Route path="/" component={Footer} />
+    </Router>
   )
 }
 
