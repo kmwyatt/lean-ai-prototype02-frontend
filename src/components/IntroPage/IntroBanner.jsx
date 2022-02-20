@@ -1,3 +1,5 @@
+// @ts-check
+
 import React from 'react'
 import styled from 'styled-components'
 import { FadeIn, Floating } from '../util/Effect'

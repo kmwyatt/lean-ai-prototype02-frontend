@@ -1,3 +1,5 @@
+// @ts-check
+
 import { Container } from '@mui/material'
 import React from 'react'
 import styled from 'styled-components'

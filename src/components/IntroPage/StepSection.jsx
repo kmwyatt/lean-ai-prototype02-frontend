@@ -1,18 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import { Emerge } from "../util/Effect";
-import { Inner, H2 } from "../util/Common";
+// @ts-check
+
+import React from 'react'
+import styled from 'styled-components'
+import { Emerge } from '../util/Effect'
+import { Inner, H2 } from '../util/Common'
 
 const StepBase = styled.section`
   position: relative;
-  background-image: url("./images/step-bg.jpg");
+  background-image: url('./images/step-bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   padding: 60px 0;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -20,13 +22,13 @@ const StepBase = styled.section`
     right: 0;
     background: rgba(220, 220, 220, 0.85);
   }
-`;
+`
 
 const StepGroup = styled.div`
   flex-direction: column;
   align-items: center;
   display: flex;
-`;
+`
 
 export default function StepSection() {
   return (
@@ -40,5 +42,5 @@ export default function StepSection() {
         </StepGroup>
       </Inner>
     </StepBase>
-  );
+  )
 }

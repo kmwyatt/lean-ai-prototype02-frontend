@@ -1,3 +1,6 @@
+// @ts-check
+
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { Info } from '../util/Common'
@@ -23,6 +26,7 @@ const GoSignUp = styled.div`
   cursor: pointer;
 `
 
+// @ts-ignore
 function SignUpCard(props) {
   const onRegisterHandler = () => {
     props.history.push('/')

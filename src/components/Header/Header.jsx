@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import React from 'react'
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 const Logo = styled.img`
   width: 108px;
@@ -26,7 +27,7 @@ function Header() {
     <AppBar position="fixed" color="inherit">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <Button>
+          <Button href="/">
             <Logo src="./images/logo.png" alt="LEAN-AI" />
           </Button>
           <Box
@@ -37,17 +38,14 @@ function Header() {
               mr: 5,
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{
-                  color: '#333',
-                  display: 'block',
-                }}
-              >
-                {page}
+            <Link to="/notice" style={{ textDecoration: 'none' }}>
+              <Button sx={{ color: '#333', display: 'block' }}>공지사항</Button>
+            </Link>
+            <Link to="/main" style={{ textDecoration: 'none' }}>
+              <Button sx={{ color: '#333', display: 'block' }}>
+                메인 페이지
               </Button>
-            ))}
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>

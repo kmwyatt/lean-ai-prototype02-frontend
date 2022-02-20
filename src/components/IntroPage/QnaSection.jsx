@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { Inner, H3 } from "../util/Common";
+// @ts-check
 
-// QNA-SECTION
+import React from 'react'
+import styled from 'styled-components'
+import { Inner, H3 } from '../util/Common'
+
 const QnaBase = styled.section`
   background: #ffffff;
   padding: 60px 0;
-`;
+`
 
 const QnaGroup = styled.div`
   margin-left: 60px;
@@ -14,7 +15,7 @@ const QnaGroup = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-`;
+`
 
 export default function QnaSection() {
   return (
@@ -32,5 +33,5 @@ export default function QnaSection() {
         </QnaGroup>
       </Inner>
     </QnaBase>
-  );
+  )
 }
