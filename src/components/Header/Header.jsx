@@ -21,15 +21,15 @@ const Logo = styled.img`
 `
 
 function Header() {
-  const pages = ['공지사항', '메인 페이지']
-
   return (
     <AppBar position="fixed" color="inherit">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <Button href="/">
-            <Logo src="./images/logo.png" alt="LEAN-AI" />
-          </Button>
+          <Link to="/">
+            <Button>
+              <Logo src="./images/logo.png" alt="LEAN-AI" />
+            </Button>
+          </Link>
           <Box
             sx={{
               flexGrow: 1,
@@ -38,9 +38,6 @@ function Header() {
               mr: 5,
             }}
           >
-            <Link to="/notice" style={{ textDecoration: 'none' }}>
-              <Button sx={{ color: '#333', display: 'block' }}>공지사항</Button>
-            </Link>
             <Link to="/main" style={{ textDecoration: 'none' }}>
               <Button sx={{ color: '#333', display: 'block' }}>
                 메인 페이지
