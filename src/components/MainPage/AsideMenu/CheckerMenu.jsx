@@ -47,7 +47,7 @@ function CheckerMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
-              to="/main/check"
+              to="/main/checkedupload"
               style={{
                 textDecoration: 'none',
                 width: '100%',

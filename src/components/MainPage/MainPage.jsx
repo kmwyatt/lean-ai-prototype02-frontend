@@ -7,6 +7,7 @@ import { useUserState } from '../../context/UserContext'
 import AdminMenu from './AsideMenu/AdminMenu'
 import CheckerMenu from './AsideMenu/CheckerMenu'
 import WorkerMenu from './AsideMenu/WorkerMenu'
+import CheckSection from './Section/CheckSection/CheckSection'
 import JoinRequestSection from './Section/JoinRequestSection/JoinRequestSection'
 import MyPageSection from './Section/MyPageSection/MyPageSection'
 import NoticeContent from './Section/NoticeSection/NoticeContent'
@@ -37,6 +38,7 @@ function MainPage() {
         <Route exact path="/main/joined" component={JoinedProjectSection} />
         <Route exact path="/main/work" component={WorkSection} />
         <Route exact path="/main/workhistory" component={WorkHistorySection} />
+        <Route exact path="/main/check" component={CheckSection} />
         <Route exact path="/main/mypage" component={MyPageSection} />
         <Route exact path="/main/notice" component={NoticeSection} />
         <Route exact path="/main/noticecontent" component={NoticeContent} />

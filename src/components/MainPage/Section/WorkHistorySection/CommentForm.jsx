@@ -1,5 +1,6 @@
 // @ts-check
 
+import { ArrowForward } from '@mui/icons-material'
 import {
   Avatar,
   Box,
@@ -32,13 +33,11 @@ function CommentForm(props) {
 
   const sendHandler = async () => {
     const body = {
-      workerIndex: userState.index,
-      workerId: userState.id,
-      projectIndex: props.info.projectIndex,
-      projectName: props.info.projectName,
+      role: userState.role,
+      postIndex: props.info.postIndex,
       comment: writeComment,
     }
-
+    console.log('post.info', props.info)
     try {
       await axios.post('/api/worker/comment', body)
       alert('코멘트를 남겼습니다.')
@@ -46,6 +45,7 @@ function CommentForm(props) {
         pathname: '/main/workhistory',
         state: {
           workerIndex: userState.index,
+          postIndex: props.info.postIndex,
           projectIndex: props.info.projectIndex,
           projectName: props.info.projectName,
         },
@@ -124,8 +124,9 @@ function CommentForm(props) {
     }
   }
   return (
-    <>
-      <Card sx={{ m: 1, mb: 0 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+      <ArrowForward sx={{ mx: 3, mt: 1, color: '#999' }} />
+      <Card sx={{ m: 1, mb: 0, flexGrow: 1 }}>
         <CardContent sx={{ mb: -3 }}>
           <Box
             sx={{
@@ -205,7 +206,7 @@ function CommentForm(props) {
           <Button onClick={handleClose}>닫기</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   )
 }
 

@@ -5,7 +5,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import SectionTitle from '../../../util/SectionTitle'
-import CommentForm from './CommentForm'
 import WorkHistoryCard from './WorkHistoryCard'
 
 // @ts-ignore
@@ -43,10 +42,9 @@ function WorkHistorySection(props) {
       </Button>
       <SectionTitle text={`No.${state.projectIndex} [${state.projectName}]`} />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        {list.map((project) => (
-          <WorkHistoryCard info={project} postIndex={state.postIndex} />
+        {list.map((post) => (
+          <WorkHistoryCard info={post} state={state} />
         ))}
-        <CommentForm info={state} />
       </Box>
     </Box>
   )
