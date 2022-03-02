@@ -2,17 +2,42 @@
 
 import { Container } from '@mui/material'
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { useUserState } from '../../context/UserContext'
+import AdminMenu from './AsideMenu/AdminMenu'
 import WorkerMenu from './AsideMenu/WorkerMenu'
-import ProjectSection from './Section/ProjectSection'
+import JoinRequestSection from './Section/JoinRequestSection/JoinRequestSection'
+import MyPageSection from './Section/MyPageSection/MyPageSection'
+import NoticeContent from './Section/NoticeSection/NoticeContent'
+import NoticeSection from './Section/NoticeSection/NoticeSection'
+import AdminProjectSection from './Section/ProjectSection/AdminProjectSection'
+import JoinedProjectSection from './Section/ProjectSection/JoinedProjectSection'
+import WorkerProjectSection from './Section/ProjectSection/WorkerProjectSection'
+import WorkHistorySection from './Section/WorkHistorySection/WorkHistorySection'
+import WorkSection from './Section/WorkSection/WorkSection'
 
 function MainPage() {
+  const userState = useUserState()
   return (
     <Container
       maxWidth="lg"
       sx={{ minHeight: '100vh', display: 'flex', pt: 8 }}
     >
-      <WorkerMenu />
-      <ProjectSection />
+      {userState.role === 1 && <WorkerMenu />}
+      {userState.role === 3 && <AdminMenu />}
+      <Switch>
+        <Route exact path="/main/project">
+          {userState.role === 1 && <WorkerProjectSection />}
+          {userState.role === 3 && <AdminProjectSection />}
+        </Route>
+        <Route exact path="/main/joined" component={JoinedProjectSection} />
+        <Route exact path="/main/work" component={WorkSection} />
+        <Route exact path="/main/workhistory" component={WorkHistorySection} />
+        <Route exact path="/main/mypage" component={MyPageSection} />
+        <Route exact path="/main/notice" component={NoticeSection} />
+        <Route exact path="/main/noticecontent" component={NoticeContent} />
+        <Route exact path="/main/joinrequest" component={JoinRequestSection} />
+      </Switch>
     </Container>
   )
 }

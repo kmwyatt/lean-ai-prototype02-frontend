@@ -14,6 +14,7 @@ import {
 } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import { withRouter } from 'react-router-dom'
+import { login, useUserDispatch, useUserState } from '../../context/UserContext'
 
 const CardBase = styled.div`
   width: 100%;
@@ -28,8 +29,9 @@ const CardBase = styled.div`
 
 // @ts-ignore
 function LoginCard(props) {
+  const userDispatch = useUserDispatch()
+
   const [id, setId] = React.useState('')
-  const [role, setRole] = React.useState(1)
 
   // @ts-ignore
   const idHandler = (event) => {
@@ -37,13 +39,17 @@ function LoginCard(props) {
   }
 
   // @ts-ignore
-  const roleHandler = (event) => {
-    setRole(event.target.value)
-  }
-
-  const loginHandler = () => {
-    console.log('id:', id, 'role:', role)
-    props.history.go(0)
+  const loginHandler = async (event) => {
+    event.preventDefault()
+    const body = {
+      id: id,
+    }
+    try {
+      await login(userDispatch, body)
+      props.history.push('/main/project')
+    } catch (err) {
+      props.history.go(0)
+    }
   }
 
   return (
@@ -60,17 +66,6 @@ function LoginCard(props) {
           value={id}
           onChange={idHandler}
         />
-        <br />
-        <RadioGroup
-          row
-          name="user-role"
-          defaultValue="1"
-          onChange={roleHandler}
-        >
-          <FormControlLabel value="1" control={<Radio />} label="작업자" />
-          <FormControlLabel value="2" control={<Radio />} label="검수자" />
-          <FormControlLabel value="3" control={<Radio />} label="관리자" />
-        </RadioGroup>
         <br />
         <Button variant="contained" onClick={loginHandler}>
           로그인

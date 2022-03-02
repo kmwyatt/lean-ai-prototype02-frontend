@@ -29,7 +29,7 @@ const GoSignUp = styled.div`
 // @ts-ignore
 function SignUpCard(props) {
   const onRegisterHandler = () => {
-    props.history.push('/')
+    props.history.push('/register')
   }
 
   return (

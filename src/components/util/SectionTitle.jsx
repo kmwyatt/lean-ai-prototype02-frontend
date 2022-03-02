@@ -4,13 +4,14 @@ import { Divider, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 
-function SectionTitle() {
+// @ts-ignore
+function SectionTitle(props) {
   return (
-    <Box>
+    <Box width="100%">
       <Typography variant="h5" color="#333">
-        신청 가능 작업 목록
+        {props.text}
       </Typography>
-      <Divider sx={{ mt: 0.5, mb: 1, border: 1, color: '#ccc' }} />
+      <Divider sx={{ mt: 0.5, mb: 2, border: 1, color: '#ccc' }} />
     </Box>
   )
 }

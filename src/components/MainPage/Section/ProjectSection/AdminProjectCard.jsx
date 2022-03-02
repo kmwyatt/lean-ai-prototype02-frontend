@@ -7,34 +7,38 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Typography,
 } from '@mui/material'
 import React from 'react'
 
-function ProjectCard() {
+// @ts-ignore
+function AdminProjectCard(props) {
   return (
-    <Card sx={{ m: 1, width: 210, height: 240, position: 'relative' }}>
+    <Card sx={{ m: 1, width: 270, height: 330, position: 'relative' }}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={`/staticfiles/${props.info.image}`}
+      />
       <CardContent sx={{ pb: 0 }}>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary">
-          No. 1
-        </Typography>
         <Typography variant="h6" component="div">
-          AI 학습용 데이터 수집
+          {props.info.name}
         </Typography>
         <Typography sx={{ mb: 1, fontSize: 14 }} color="text.secondary">
-          작업 조건 : 20세 이상
+          작업 단가 : {props.info.point}P
         </Typography>
-        <Typography variant="body2">
-          재택근무 / 건당 300원 / PC업로드
-        </Typography>
+        <Typography variant="body2">{props.info.period}</Typography>
       </CardContent>
-      <Box sx={{ position: 'absolute', bottom: 0 }}>
+      <Box
+        sx={{ position: 'absolute', left: 0, right: 0, mx: 'auto', bottom: 0 }}
+      >
         <CardActions sx={{ mx: 1, display: 'flex' }}>
           <Button size="small" variant="contained" sx={{ flexGrow: 1 }}>
-            상세정보 확인
+            수정
           </Button>
           <Button size="small" variant="contained" sx={{ flexGrow: 1 }}>
-            작업 신청
+            삭제
           </Button>
         </CardActions>
         <Box
@@ -48,7 +52,7 @@ function ProjectCard() {
         >
           <PriorityHigh fontSize="small" color="error" />
           <Typography sx={{ fontSize: 14 }} color="error">
-            상세정보 확인 후 작업 신청
+            삭제 후 복구 불가
           </Typography>
         </Box>
       </Box>
@@ -56,4 +60,4 @@ function ProjectCard() {
   )
 }
 
-export default ProjectCard
+export default AdminProjectCard

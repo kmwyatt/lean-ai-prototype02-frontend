@@ -10,7 +10,7 @@ import {
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function WorkerMenu() {
+function AdminMenu() {
   return (
     <Box sx={{ width: '200px', bgcolor: '#30a9de' }}>
       <List sx={{ pt: 4, width: 200 }}>
@@ -25,14 +25,14 @@ function WorkerMenu() {
                 textAlign: 'center',
               }}
             >
-              <ListItemText primary="신청 가능 작업 목록" />
+              <ListItemText primary="프로젝트 관리" />
             </Link>
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton>
             <Link
-              to="/main/joined"
+              to="/main/joinrequest"
               style={{
                 textDecoration: 'none',
                 width: '100%',
@@ -40,37 +40,7 @@ function WorkerMenu() {
                 textAlign: 'center',
               }}
             >
-              <ListItemText primary="할당된 작업 목록" />
-            </Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <Link
-              to="/main/work"
-              style={{
-                textDecoration: 'none',
-                width: '100%',
-                color: '#333',
-                textAlign: 'center',
-              }}
-            >
-              <ListItemText primary="작업 현황" />
-            </Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <Link
-              to="/main/mypage"
-              style={{
-                textDecoration: 'none',
-                width: '100%',
-                color: '#333',
-                textAlign: 'center',
-              }}
-            >
-              <ListItemText primary="회원 정보" />
+              <ListItemText primary="프로젝트 신청 승인" />
             </Link>
           </ListItemButton>
         </ListItem>
@@ -94,4 +64,4 @@ function WorkerMenu() {
   )
 }
 
-export default WorkerMenu
+export default AdminMenu
