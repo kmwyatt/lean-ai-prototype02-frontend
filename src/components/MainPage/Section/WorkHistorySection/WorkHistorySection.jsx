@@ -44,7 +44,7 @@ function WorkHistorySection(props) {
       <SectionTitle text={`No.${state.projectIndex} [${state.projectName}]`} />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         {list.map((project) => (
-          <WorkHistoryCard info={project} />
+          <WorkHistoryCard info={project} postIndex={state.postIndex} />
         ))}
         <CommentForm info={state} />
       </Box>

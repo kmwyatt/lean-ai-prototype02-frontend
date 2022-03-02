@@ -97,6 +97,7 @@ function CommentForm(props) {
       formData.append('projectName', props.info.projectName)
       formData.append('workerIndex', userState.index)
       formData.append('workerId', userState.id)
+      formData.append('reuploaded', 'true')
 
       const config = { headers: { 'Content-Type': 'multipart/form-data' } }
 

@@ -5,12 +5,14 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { useUserState } from '../../context/UserContext'
 import AdminMenu from './AsideMenu/AdminMenu'
+import CheckerMenu from './AsideMenu/CheckerMenu'
 import WorkerMenu from './AsideMenu/WorkerMenu'
 import JoinRequestSection from './Section/JoinRequestSection/JoinRequestSection'
 import MyPageSection from './Section/MyPageSection/MyPageSection'
 import NoticeContent from './Section/NoticeSection/NoticeContent'
 import NoticeSection from './Section/NoticeSection/NoticeSection'
 import AdminProjectSection from './Section/ProjectSection/AdminProjectSection'
+import CheckerProjectSection from './Section/ProjectSection/CheckerProjectSection'
 import JoinedProjectSection from './Section/ProjectSection/JoinedProjectSection'
 import WorkerProjectSection from './Section/ProjectSection/WorkerProjectSection'
 import WorkHistorySection from './Section/WorkHistorySection/WorkHistorySection'
@@ -24,10 +26,12 @@ function MainPage() {
       sx={{ minHeight: '100vh', display: 'flex', pt: 8 }}
     >
       {userState.role === 1 && <WorkerMenu />}
+      {userState.role === 2 && <CheckerMenu />}
       {userState.role === 3 && <AdminMenu />}
       <Switch>
         <Route exact path="/main/project">
           {userState.role === 1 && <WorkerProjectSection />}
+          {userState.role === 2 && <CheckerProjectSection />}
           {userState.role === 3 && <AdminProjectSection />}
         </Route>
         <Route exact path="/main/joined" component={JoinedProjectSection} />

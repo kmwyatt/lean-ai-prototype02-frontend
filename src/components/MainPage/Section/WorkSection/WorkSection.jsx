@@ -35,7 +35,7 @@ function WorkSection(props) {
   useEffect(() => {
     getList()
     console.log(list)
-  })
+  }, [])
 
   return (
     <Box sx={{ m: 5, width: '100%' }}>
@@ -72,6 +72,7 @@ function WorkSection(props) {
                             pathname: '/main/workhistory',
                             state: {
                               workerIndex: userState.index,
+                              postIndex: work.index,
                               projectIndex: work.projectIndex,
                               projectName: work.projectName,
                             },

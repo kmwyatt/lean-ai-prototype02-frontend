@@ -10,12 +10,21 @@ import {
   Typography,
 } from '@mui/material'
 import moment from 'moment'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // @ts-ignore
 function WorkHistoryCard(props) {
+  const [bgcolor, setBgcolor] = useState('#fff')
+
+  useEffect(() => {
+    if (props.info.index === props.postIndex) {
+      setBgcolor('#ffe')
+    }
+    console.log(props.info.index, props.postIndex)
+  }, [])
+
   return (
-    <Card sx={{ m: 1, pb: 0 }}>
+    <Card sx={{ m: 1, pb: 0, backgroundColor: bgcolor }}>
       <CardContent>
         <Box
           sx={{
@@ -34,6 +43,11 @@ function WorkHistoryCard(props) {
           <Typography variant="body1" sx={{ flexGrow: 1 }}>
             {props.info.workerId}
           </Typography>
+          {props.info.reuploaded && (
+            <Typography variant="body2" color="#d33" sx={{ mr: 3 }}>
+              재제출
+            </Typography>
+          )}
           {props.info.dataNum && (
             <Typography variant="body2" color="#333">
               {`데이터 수 ${props.info.dataNum}`}
