@@ -29,7 +29,7 @@ function NoticeContent(props) {
                   width: 24,
                   height: 24,
                   fontSize: 12,
-                  bgcolor: 'navy',
+                  bgcolor: 'darkgreen',
                 }}
               >
                 {state.writerId[0].toUpperCase()}

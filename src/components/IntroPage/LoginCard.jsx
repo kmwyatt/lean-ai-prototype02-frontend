@@ -5,16 +5,13 @@ import styled from 'styled-components'
 import {
   Button,
   FormControl,
-  FormControlLabel,
   Input,
   InputAdornment,
   InputLabel,
-  Radio,
-  RadioGroup,
 } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import { withRouter } from 'react-router-dom'
-import { login, useUserDispatch, useUserState } from '../../context/UserContext'
+import { login, useUserDispatch } from '../../context/UserContext'
 
 const CardBase = styled.div`
   width: 100%;

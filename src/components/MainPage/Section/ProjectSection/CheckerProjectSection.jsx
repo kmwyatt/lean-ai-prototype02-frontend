@@ -29,7 +29,7 @@ function CheckerProjectSection(props) {
   }, [state])
   return (
     <Box sx={{ p: 5, width: '100%' }}>
-      <SectionTitle text="신청 가능 작업 목록" />
+      <SectionTitle text="데이터 검수" />
       <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
         {list.map((project) => (
           <CheckerProjectCard info={project} userInfo={userState} />

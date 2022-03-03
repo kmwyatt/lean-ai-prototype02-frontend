@@ -14,8 +14,11 @@ function CommentCard(props) {
     if (props.content.role === 1) {
       setProfileColor('royalblue')
       setUserId(props.info.workerId)
+    } else if (props.content.role === 2) {
+      setProfileColor('darkorange')
+      setUserId(props.info.checkerId)
     }
-  }, [])
+  }, [props])
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>

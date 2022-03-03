@@ -38,8 +38,30 @@ function CheckSection(props) {
 
   useEffect(() => {
     getList()
-    console.log(list)
   }, [state])
+
+  function rowClickHandler(work) {
+    if (work.checking < 0) {
+      alert('검수 완료된 데이터입니다.')
+      return
+    } else if (work.checking > 0) {
+      if (work.checking !== userState.index) {
+        alert('다른 검수자가 검수중인 데이터입니다.')
+        return
+      }
+    }
+    if (userState.checking && userState.index !== work.checking) {
+      alert(`진행중인 ${userState.checking}번 데이터 검수를 완료해주세요.`)
+      return
+    }
+    props.history.push({
+      pathname: '/main/checkdata',
+      state: {
+        ...work,
+      },
+    })
+    console.log(work)
+  }
 
   return (
     <Box sx={{ m: 5, width: '100%' }}>
@@ -59,7 +81,7 @@ function CheckSection(props) {
             <TableBody>
               {list.map((work) => {
                 return (
-                  <TableRow>
+                  <TableRow hover onClick={() => rowClickHandler(work)}>
                     <TableCell align="center">{work.index}</TableCell>
                     <TableCell align="center">{work.workerId}</TableCell>
                     <TableCell align="center">{work.dataNum}</TableCell>

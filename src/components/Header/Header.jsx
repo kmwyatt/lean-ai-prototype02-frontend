@@ -45,9 +45,9 @@ function Header(props) {
     if (userState.role === 1) {
       setProfileColor('royalblue')
     } else if (userState.role === 2) {
-      setProfileColor('purple')
+      setProfileColor('darkorange')
     } else if (userState.role === 3) {
-      setProfileColor('navy')
+      setProfileColor('darkgreen')
     } else {
       setProfileColor('gray')
     }
