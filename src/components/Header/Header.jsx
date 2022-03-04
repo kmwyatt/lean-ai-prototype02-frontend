@@ -25,6 +25,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Notifications } from '@mui/icons-material'
+import AlertList from './AlertList'
 
 const Logo = styled.img`
   width: 108px;
@@ -36,7 +37,6 @@ function Header(props) {
   const userState = useUserState()
   const userDispatch = useUserDispatch()
   const [alertCount, setAlertCount] = useState(0)
-  // @ts-ignore
   const [alertContent, setAlertContent] = useState([])
   const [profileColor, setProfileColor] = useState('gray')
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -52,6 +52,10 @@ function Header(props) {
       setProfileColor('gray')
     }
   }, [userState])
+
+  useEffect(() => {
+    getAlert()
+  }, [props])
 
   // @ts-ignore
   const handleClick = (event) => {
@@ -81,13 +85,12 @@ function Header(props) {
     }
     const res = await axios.post('/api/account/alert', body)
     if (res.data && alertCount !== res.data.count) {
-      setAlertCount(res.data.count)
-      setAlertContent(res.data.content)
+      setAlertCount(res.data.length)
+      setAlertContent(res.data)
       console.log(res.data)
       console.log(alertCount)
     }
   }
-  getAlert()
 
   return (
     <>
@@ -152,12 +155,14 @@ function Header(props) {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
+        onClick={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        sx={{ width: 350, height: 250 }}
       >
-        <Typography sx={{ p: 10 }}>여기에 알림이 뜰 것</Typography>
+        <AlertList alertList={alertContent} />
       </Popover>
     </>
   )

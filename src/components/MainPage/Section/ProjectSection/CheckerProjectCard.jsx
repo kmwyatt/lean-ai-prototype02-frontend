@@ -1,6 +1,5 @@
 // @ts-check
 
-import { PriorityHigh } from '@mui/icons-material'
 import {
   Box,
   Button,

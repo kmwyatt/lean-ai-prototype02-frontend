@@ -80,6 +80,13 @@ function CheckDataSection(props) {
       await axios.post('/api/checker/feedback', body)
       alert('검수 완료되었습니다.')
       login(userDispatch, user)
+      props.history.push({
+        pathname: '/main/check',
+        state: {
+          index: state.projectIndex,
+          name: state.projectName,
+        },
+      })
     } catch (err) {
       alert('데이터 검수에 실패했습니다.')
     }
