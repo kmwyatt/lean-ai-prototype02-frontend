@@ -17,6 +17,7 @@ import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import {
+  login,
   logout,
   useUserDispatch,
   useUserState,
@@ -54,7 +55,13 @@ function Header(props) {
   }, [userState])
 
   useEffect(() => {
-    getAlert()
+    if (userState.index) {
+      getAlert()
+      const body = {
+        id: userState.id,
+      }
+      login(userDispatch, body)
+    }
   }, [props])
 
   // @ts-ignore

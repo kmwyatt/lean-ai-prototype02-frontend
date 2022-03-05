@@ -1,7 +1,6 @@
 // @ts-check
 
-import { Box, List, Typography } from '@mui/material'
-import axios from 'axios'
+import { Box, List } from '@mui/material'
 import React from 'react'
 import CommentAlert from './CommentAlert'
 import FeedbackAlert from './FeedbackAlert'

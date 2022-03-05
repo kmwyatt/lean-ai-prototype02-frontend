@@ -32,14 +32,14 @@ function FeedbackForm(props) {
 
   const sendHandler = async () => {
     const body = {
-      workerIndex: userState.index,
+      checkerIndex: userState.index,
       role: userState.role,
       postIndex: props.info.postIndex,
       comment: writeComment,
     }
     console.log('post.info', props.info)
     try {
-      await axios.post('/api/worker/comment', body)
+      await axios.post('/api/checker/comment', body)
       alert('코멘트를 남겼습니다.')
       props.history.push({
         pathname: '/main/workhistory',
@@ -57,8 +57,8 @@ function FeedbackForm(props) {
     }
   }
 
-  const [okData, setOkData] = useState('')
-  const [noData, setNoData] = useState('')
+  const [okData, setOkData] = useState(props.post.okData)
+  const [noData, setNoData] = useState(props.post.noData)
   const [comment, setComment] = useState('')
 
   const [open, setOpen] = React.useState(false)
@@ -68,6 +68,9 @@ function FeedbackForm(props) {
   }
 
   const handleClose = () => {
+    setOkData(props.post.okData)
+    setNoData(props.post.noData)
+    setComment('')
     setOpen(false)
   }
 
@@ -90,21 +93,28 @@ function FeedbackForm(props) {
   const submitHandler = async (event) => {
     event.preventDefault()
     const body = {
-      postIndex: props.info.postIndex,
+      postIndex: props.post.index,
       projectIndex: props.info.projectIndex,
-      workerIndex: props.info.workerIndex,
-      checkerIndex: userState.index,
-      checkerId: userState.id,
       role: userState.role,
       okData: okData,
       noData: noData,
       comment: comment,
     }
+    console.log(body)
     try {
-      await axios.post('/api/checker/feedback', body)
-      alert('검수 완료되었습니다.')
+      await axios.post('/api/checker/modifyfeedback', body)
+      alert('승인 수정되었습니다.')
+      handleClose()
+      props.history.push({
+        pathname: '/main/workhistory',
+        state: {
+          userIndex: userState.index,
+          projectIndex: props.info.projectIndex,
+          projectName: props.info.projectName,
+        },
+      })
     } catch (err) {
-      alert('데이터 검수에 실패했습니다.')
+      alert('승인 수정에 실패했습니다.')
     }
   }
 
@@ -165,7 +175,7 @@ function FeedbackForm(props) {
         </CardContent>
       </Card>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>작업물 업로드</DialogTitle>
+        <DialogTitle>승인 수정</DialogTitle>
         <DialogContent>
           <Box sx={{ display: 'flex' }}>
             <TextField
@@ -186,26 +196,17 @@ function FeedbackForm(props) {
             />
           </Box>
           <br />
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <TextField
-              variant="standard"
-              label="코멘트"
-              value={comment}
-              fullWidth
-              sx={{ mr: 2 }}
-              onChange={commentHandler}
-            />
-            <Button
-              variant="contained"
-              sx={{ width: 120 }}
-              onClick={submitHandler}
-            >
-              검수 완료
-            </Button>
-          </Box>
+          <TextField
+            variant="standard"
+            label="코멘트"
+            value={comment}
+            fullWidth
+            sx={{ mr: 2 }}
+            onChange={commentHandler}
+          />
         </DialogContent>
         <DialogActions>
-          <Button onClick={submitHandler}>업로드</Button>
+          <Button onClick={submitHandler}>전송</Button>
           <Button onClick={handleClose}>닫기</Button>
         </DialogActions>
       </Dialog>

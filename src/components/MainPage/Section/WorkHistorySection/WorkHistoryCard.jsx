@@ -96,7 +96,9 @@ function WorkHistoryCard(props) {
           <CommentCard content={_comment} info={props.info} />
         ))}
       {thisPost && userState.role === 1 && <CommentForm info={props.state} />}
-      {thisPost && userState.role > 1 && <FeedbackForm info={props.state} />}
+      {thisPost && userState.role > 1 && (
+        <FeedbackForm info={props.state} post={props.info} />
+      )}
     </>
   )
 }

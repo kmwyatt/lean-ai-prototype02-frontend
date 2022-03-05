@@ -69,6 +69,9 @@ function CommentForm(props) {
   }
 
   const handleClose = () => {
+    setComment('')
+    setDataNum('')
+    setFile(undefined)
     setOpen(false)
   }
 
@@ -106,13 +109,10 @@ function CommentForm(props) {
         await axios.post('/api/worker/uploaddata', formData, config)
         alert('업로드가 완료되었습니다.')
         handleClose()
-        setComment('')
-        setDataNum('')
-        setFile(undefined)
         props.history.push({
           pathname: '/main/workhistory',
           state: {
-            workerIndex: userState.index,
+            userIndex: userState.index,
             projectIndex: props.info.projectIndex,
             projectName: props.info.projectName,
           },

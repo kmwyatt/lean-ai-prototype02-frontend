@@ -1,9 +1,9 @@
 // @ts-check
 
 import { Container } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useUserState } from '../../context/UserContext'
+import { login, useUserDispatch, useUserState } from '../../context/UserContext'
 import AdminMenu from './AsideMenu/AdminMenu'
 import CheckerMenu from './AsideMenu/CheckerMenu'
 import WorkerMenu from './AsideMenu/WorkerMenu'
@@ -20,8 +20,16 @@ import WorkerProjectSection from './Section/ProjectSection/WorkerProjectSection'
 import WorkHistorySection from './Section/WorkHistorySection/WorkHistorySection'
 import WorkSection from './Section/WorkSection/WorkSection'
 
-function MainPage() {
+function MainPage(props) {
   const userState = useUserState()
+  const userDispatch = useUserDispatch()
+
+  useEffect(() => {
+    const body = {
+      id: userState.id,
+    }
+    login(userDispatch, body)
+  }, [props.history])
   return (
     <Container
       maxWidth="lg"

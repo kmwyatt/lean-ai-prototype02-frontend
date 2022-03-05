@@ -50,6 +50,11 @@ function CommentCard(props) {
             <Typography variant="body1" sx={{ flexGrow: 1 }}>
               {userId}
             </Typography>
+            {props.content.modified && (
+              <Typography variant="body2" color="#d33" sx={{ mr: 3 }}>
+                승인 수정
+              </Typography>
+            )}
             <Typography
               variant="body1"
               color="#999"
