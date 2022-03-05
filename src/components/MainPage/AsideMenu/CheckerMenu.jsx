@@ -47,7 +47,7 @@ function CheckerMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
-              to="/main/checkedupload"
+              to="/main/work"
               style={{
                 textDecoration: 'none',
                 width: '100%',
@@ -55,7 +55,7 @@ function CheckerMenu() {
                 textAlign: 'center',
               }}
             >
-              <ListItemText primary="나의 검수 현황" />
+              <ListItemText primary="검수 현황" />
             </Link>
           </ListItemButton>
         </ListItem>

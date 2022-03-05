@@ -11,11 +11,14 @@ import {
 } from '@mui/material'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { useUserState } from '../../../../context/UserContext'
 import CommentCard from './CommentCard'
 import CommentForm from './CommentForm'
+import FeedbackForm from './FeedbackForm'
 
 // @ts-ignore
 function WorkHistoryCard(props) {
+  const userState = useUserState()
   const [bgcolor, setBgcolor] = useState('#fff')
   const [thisPost, setThisPost] = useState(false)
 
@@ -92,7 +95,8 @@ function WorkHistoryCard(props) {
         props.info.commentList.map((_comment) => (
           <CommentCard content={_comment} info={props.info} />
         ))}
-      {thisPost && <CommentForm info={props.state} />}
+      {thisPost && userState.role === 1 && <CommentForm info={props.state} />}
+      {thisPost && userState.role > 1 && <FeedbackForm info={props.state} />}
     </>
   )
 }

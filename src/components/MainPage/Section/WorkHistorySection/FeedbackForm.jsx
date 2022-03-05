@@ -10,7 +10,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
   Typography,
@@ -21,7 +20,7 @@ import { withRouter } from 'react-router-dom'
 import { useUserState } from '../../../../context/UserContext'
 
 // @ts-ignore
-function CommentForm(props) {
+function FeedbackForm(props) {
   const userState = useUserState()
 
   const [writeComment, setWriteComment] = useState('')
@@ -58,9 +57,9 @@ function CommentForm(props) {
     }
   }
 
+  const [okData, setOkData] = useState('')
+  const [noData, setNoData] = useState('')
   const [comment, setComment] = useState('')
-  const [dataNum, setDataNum] = useState('')
-  const [file, setFile] = useState(undefined)
 
   const [open, setOpen] = React.useState(false)
 
@@ -78,52 +77,37 @@ function CommentForm(props) {
   }
 
   // @ts-ignore
-  const dataNumHandler = (event) => {
-    setDataNum(event.target.value)
+  const okDataHandler = (event) => {
+    setOkData(event.target.value)
   }
 
   // @ts-ignore
-  const saveFile = (event) => {
-    setFile(event.target.files[0])
+  const noDataHandler = (event) => {
+    setNoData(event.target.value)
   }
 
-  const submitHandler = async () => {
-    if (file) {
-      const formData = new FormData()
-      formData.append('comment', comment)
-      formData.append('dataNum', dataNum)
-      // @ts-ignore
-      formData.append('file', file)
-      formData.append('projectIndex', props.info.projectIndex)
-      formData.append('projectName', props.info.projectName)
-      formData.append('workerIndex', userState.index)
-      formData.append('workerId', userState.id)
-      formData.append('reuploaded', 'true')
-
-      const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-
-      try {
-        await axios.post('/api/worker/uploaddata', formData, config)
-        alert('업로드가 완료되었습니다.')
-        handleClose()
-        setComment('')
-        setDataNum('')
-        setFile(undefined)
-        props.history.push({
-          pathname: '/main/workhistory',
-          state: {
-            workerIndex: userState.index,
-            projectIndex: props.info.projectIndex,
-            projectName: props.info.projectName,
-          },
-        })
-      } catch (err) {
-        alert('업로드에 실패했습니다.')
-      }
-    } else {
-      alert('파일이 없습니다.')
+  // @ts-ignore
+  const submitHandler = async (event) => {
+    event.preventDefault()
+    const body = {
+      postIndex: props.info.postIndex,
+      projectIndex: props.info.projectIndex,
+      workerIndex: props.info.workerIndex,
+      checkerIndex: userState.index,
+      checkerId: userState.id,
+      role: userState.role,
+      okData: okData,
+      noData: noData,
+      comment: comment,
+    }
+    try {
+      await axios.post('/api/checker/feedback', body)
+      alert('검수 완료되었습니다.')
+    } catch (err) {
+      alert('데이터 검수에 실패했습니다.')
     }
   }
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
       <ArrowForward sx={{ mx: 3, mt: 1, color: '#999' }} />
@@ -138,7 +122,12 @@ function CommentForm(props) {
             }}
           >
             <Avatar
-              sx={{ width: 24, height: 24, fontSize: 12, bgcolor: 'royalblue' }}
+              sx={{
+                width: 24,
+                height: 24,
+                fontSize: 12,
+                bgcolor: 'darkorange',
+              }}
             >
               {userState.id[0].toUpperCase()}
             </Avatar>
@@ -171,35 +160,48 @@ function CommentForm(props) {
             sx={{ width: 120 }}
             onClick={handleClickOpen}
           >
-            재제출하기
+            승인 수정
           </Button>
         </CardContent>
       </Card>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>작업물 업로드</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            작업물 업로드 주의 사항 <br />
-            1. Apple <br />
-            2. Banana <br />
-            3. Cherry
-          </DialogContentText>
-          <TextField
-            margin="dense"
-            fullWidth
-            label="Comment"
-            variant="standard"
-            value={comment}
-            onChange={commentHandler}
-          />
-          <Box>
-            <input type="file" onChange={saveFile} />
+          <Box sx={{ display: 'flex' }}>
             <TextField
               variant="standard"
-              label="데이터 수"
-              value={dataNum}
-              onChange={dataNumHandler}
+              label="승인 갯수"
+              value={okData}
+              fullWidth
+              sx={{ mr: 1 }}
+              onChange={okDataHandler}
             />
+            <TextField
+              variant="standard"
+              label="반려 갯수"
+              value={noData}
+              fullWidth
+              sx={{ ml: 1 }}
+              onChange={noDataHandler}
+            />
+          </Box>
+          <br />
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <TextField
+              variant="standard"
+              label="코멘트"
+              value={comment}
+              fullWidth
+              sx={{ mr: 2 }}
+              onChange={commentHandler}
+            />
+            <Button
+              variant="contained"
+              sx={{ width: 120 }}
+              onClick={submitHandler}
+            >
+              검수 완료
+            </Button>
           </Box>
         </DialogContent>
         <DialogActions>
@@ -211,4 +213,4 @@ function CommentForm(props) {
   )
 }
 
-export default withRouter(CommentForm)
+export default withRouter(FeedbackForm)

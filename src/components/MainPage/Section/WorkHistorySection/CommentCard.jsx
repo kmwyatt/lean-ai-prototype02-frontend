@@ -17,6 +17,9 @@ function CommentCard(props) {
     } else if (props.content.role === 2) {
       setProfileColor('darkorange')
       setUserId(props.info.checkerId)
+    } else if (props.content.role === 3) {
+      setProfileColor('darkgreen')
+      setUserId(props.content.checkerId)
     }
   }, [props])
 

@@ -4,11 +4,13 @@ import { Box, Button } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import { useUserState } from '../../../../context/UserContext'
 import SectionTitle from '../../../util/SectionTitle'
 import WorkHistoryCard from './WorkHistoryCard'
 
 // @ts-ignore
 function WorkHistorySection(props) {
+  const userState = useUserState()
   const [list, setList] = useState([])
   const state = props.location.state
 
@@ -17,16 +19,29 @@ function WorkHistorySection(props) {
   }
 
   async function getList() {
-    const body = {
-      workerIndex: state.workerIndex,
-      projectIndex: state.projectIndex,
-    }
-    const res = await axios.post('/api/worker/workhistory', body)
-    if (res.data && list !== res.data) {
-      setList(res.data)
-      console.log(res.data)
+    if (userState.role === 1) {
+      const body = {
+        workerIndex: state.userIndex,
+        projectIndex: state.projectIndex,
+      }
+      const res = await axios.post('/api/worker/workhistory', body)
+      if (res.data && list !== res.data) {
+        setList(res.data)
+        console.log(res.data)
+      }
+    } else if (userState.role > 1) {
+      const body = {
+        checkerIndex: state.userIndex,
+        projectIndex: state.projectIndex,
+      }
+      const res = await axios.post('/api/checker/workhistory', body)
+      if (res.data && list !== res.data) {
+        setList(res.data)
+        console.log(res.data)
+      }
     }
   }
+
   useEffect(() => {
     getList()
   }, [state])

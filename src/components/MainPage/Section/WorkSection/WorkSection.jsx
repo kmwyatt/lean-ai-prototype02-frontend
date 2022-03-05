@@ -28,8 +28,13 @@ function WorkSection(props) {
     const body = {
       index: userState.index,
     }
-    const res = await axios.post('/api/worker/worklist', body)
-    setList(res.data)
+    if (userState.role === 1) {
+      const res = await axios.post('/api/worker/worklist', body)
+      setList(res.data)
+    } else if (userState.role > 1) {
+      const res = await axios.post('/api/checker/worklist', body)
+      setList(res.data)
+    }
   }
 
   useEffect(() => {
@@ -39,7 +44,8 @@ function WorkSection(props) {
 
   return (
     <Box sx={{ m: 5, width: '100%' }}>
-      <SectionTitle text="작업 현황" />
+      {userState.role === 1 && <SectionTitle text="작업 현황" />}
+      {userState.role > 1 && <SectionTitle text="검수 현황" />}
       <Box>
         <TableContainer component={Paper}>
           <Table>
@@ -71,7 +77,7 @@ function WorkSection(props) {
                           props.history.push({
                             pathname: '/main/workhistory',
                             state: {
-                              workerIndex: userState.index,
+                              userIndex: userState.index,
                               postIndex: work.index,
                               projectIndex: work.projectIndex,
                               projectName: work.projectName,

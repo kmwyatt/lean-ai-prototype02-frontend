@@ -1,6 +1,6 @@
 // @ts-check
 
-import { FactCheck } from '@mui/icons-material'
+import { Chat } from '@mui/icons-material'
 import {
   Avatar,
   Box,
@@ -14,7 +14,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 // @ts-ignore
-function FeedbackAlert(props) {
+function CommentAlert(props) {
   const clickHandler = () => {
     const body = {
       index: props.info.index,
@@ -36,15 +36,15 @@ function FeedbackAlert(props) {
     <ListItemButton onClick={clickHandler}>
       <ListItemAvatar>
         <Avatar sx={{ backgroundColor: '#555' }}>
-          <FactCheck />
+          <Chat />
         </Avatar>
       </ListItemAvatar>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Typography variant="body2">
-          {`${moment(props.info.content.postDate).format(
+          {`${moment(props.info.content.checkDate).format(
             'YYYY-MM-DD hh:mmA'
-          )}에 제출하신 [${props.info.content.projectName}] 데이터에
-          피드백이 달렸습니다. 지금 확인해보세요!`}
+          )}에 검수하신 [${props.info.content.projectName}] 데이터에
+          코멘트가 달렸습니다. 지금 확인해보세요!`}
         </Typography>
         <Typography variant="body2" sx={{ textAlign: 'right' }} color="gray">
           {moment(props.info.date).format('YYYY-MM-DD hh:mmA')}
@@ -54,4 +54,4 @@ function FeedbackAlert(props) {
   )
 }
 
-export default withRouter(FeedbackAlert)
+export default withRouter(CommentAlert)

@@ -3,6 +3,7 @@
 import { Box, List, Typography } from '@mui/material'
 import axios from 'axios'
 import React from 'react'
+import CommentAlert from './CommentAlert'
 import FeedbackAlert from './FeedbackAlert'
 
 // @ts-ignore
@@ -12,6 +13,8 @@ function AlertList(props) {
     console.log(alert)
     if (alert.type === 'FEEDBACK') {
       return <FeedbackAlert info={alert} />
+    } else if (alert.type === 'COMMENT') {
+      return <CommentAlert info={alert} />
     }
   }
 

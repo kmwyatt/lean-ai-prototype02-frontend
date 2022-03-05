@@ -70,7 +70,7 @@ function CheckDataSection(props) {
       checkerId: userState.id,
       role: userState.role,
       okData: okData,
-      NoData: noData,
+      noData: noData,
       comment: comment,
     }
     const user = {
