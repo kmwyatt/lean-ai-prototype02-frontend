@@ -1,7 +1,14 @@
 // @ts-check
 
-import { ArrowForward } from '@mui/icons-material'
-import { Avatar, Box, Card, CardContent, Typography } from '@mui/material'
+import { ArrowForward, Download } from '@mui/icons-material'
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+} from '@mui/material'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 
@@ -19,7 +26,7 @@ function CommentCard(props) {
       setUserId(props.info.checkerId)
     } else if (props.content.role === 3) {
       setProfileColor('darkgreen')
-      setUserId(props.content.checkerId)
+      setUserId(props.info.checkerId)
     }
   }, [props])
 
@@ -66,6 +73,19 @@ function CommentCard(props) {
           <Typography variant="h6" sx={{ mx: 1 }}>
             {props.content.comment}
           </Typography>
+          {props.content.file && (
+            <Box>
+              <Button
+                href={`/staticfiles/${props.content.file}`}
+                target="_blank"
+              >
+                <Avatar sx={{ width: 24, height: 24, backgroundColor: '#555' }}>
+                  <Download sx={{ width: 16, height: 16 }} />
+                </Avatar>
+                &nbsp;{props.content.file}
+              </Button>
+            </Box>
+          )}
         </CardContent>
       </Card>
     </Box>

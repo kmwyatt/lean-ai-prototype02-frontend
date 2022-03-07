@@ -15,32 +15,87 @@ import {
   Typography,
 } from '@mui/material'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useUserState } from '../../../../context/UserContext'
 
 // @ts-ignore
 function FeedbackForm(props) {
   const userState = useUserState()
+  const fileInput = useRef()
+
+  const [profileColor, setProfileColor] = useState('gray')
+
+  useEffect(() => {
+    if (userState.role === 1) {
+      setProfileColor('royalblue')
+    } else if (userState.role === 2) {
+      setProfileColor('darkorange')
+    } else if (userState.role === 3) {
+      setProfileColor('darkgreen')
+    }
+    console.log(props.post)
+  }, [props])
 
   const [writeComment, setWriteComment] = useState('')
+  const [file, setFile] = useState(undefined)
 
   // @ts-ignore
   const writeCommentHandler = (event) => {
     setWriteComment(event.target.value)
   }
 
-  const sendHandler = async () => {
-    const body = {
-      checkerIndex: userState.index,
-      role: userState.role,
-      postIndex: props.info.postIndex,
-      comment: writeComment,
+  // @ts-ignore
+  const fileHandler = (event) => {
+    setFile(event.target.files[0])
+  }
+
+  // @ts-ignore
+  const sendHandler = async (event) => {
+    let success = false
+    event.preventDefault()
+
+    if (!file) {
+      const body = {
+        checkerIndex: userState.index,
+        role: userState.role,
+        postIndex: props.info.postIndex,
+        comment: writeComment,
+      }
+      try {
+        await axios.post('/api/checker/comment', body)
+        success = true
+        alert('코멘트를 남겼습니다.')
+      } catch (err) {
+        console.log(err)
+        alert('코멘트를 남기는데 실패했습니다.')
+      }
+    } else {
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+      const formData = new FormData()
+
+      // @ts-ignore
+      formData.append('file', file)
+      formData.append('checkerIndex', userState.index)
+      formData.append('role', userState.role)
+      formData.append('postIndex', props.info.postIndex)
+      formData.append('comment', writeComment)
+
+      try {
+        await axios.post('/api/checker/commentwithfile', formData, config)
+        success = true
+        alert('코멘트를 남겼습니다.')
+      } catch (err) {
+        console.log(err)
+        alert('코멘트를 남기는데 실패했습니다.')
+      }
     }
-    console.log('post.info', props.info)
-    try {
-      await axios.post('/api/checker/comment', body)
-      alert('코멘트를 남겼습니다.')
+
+    if (success) {
+      setWriteComment('')
+      setFile(undefined)
+      // @ts-ignore
+      fileInput.current.value = ''
       props.history.push({
         pathname: '/main/workhistory',
         state: {
@@ -50,10 +105,6 @@ function FeedbackForm(props) {
           projectName: props.info.projectName,
         },
       })
-      setWriteComment('')
-    } catch (err) {
-      console.log(err)
-      alert('코멘트를 남기는데 실패했습니다.')
     }
   }
 
@@ -136,7 +187,7 @@ function FeedbackForm(props) {
                 width: 24,
                 height: 24,
                 fontSize: 12,
-                bgcolor: 'darkorange',
+                bgcolor: profileColor,
               }}
             >
               {userState.id[0].toUpperCase()}
@@ -147,31 +198,39 @@ function FeedbackForm(props) {
             </Typography>
           </Box>
         </CardContent>
-        <CardContent sx={{ display: 'flex', alignItems: 'center', mx: 1 }}>
-          <TextField
-            sx={{ mr: 2 }}
-            fullWidth
-            margin="none"
-            variant="standard"
-            value={writeComment}
-            onChange={writeCommentHandler}
+        <CardContent sx={{ mx: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+            <TextField
+              sx={{ mr: 2 }}
+              fullWidth
+              margin="none"
+              variant="standard"
+              value={writeComment}
+              onChange={writeCommentHandler}
+            />
+            <Button
+              size="small"
+              variant="contained"
+              onClick={sendHandler}
+              sx={{ mr: 1 }}
+            >
+              전송
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              sx={{ width: 120 }}
+              onClick={handleClickOpen}
+            >
+              승인 수정
+            </Button>
+          </Box>
+          <input
+            type="file"
+            // @ts-ignore
+            ref={fileInput}
+            onChange={fileHandler}
           />
-          <Button
-            size="small"
-            variant="contained"
-            onClick={sendHandler}
-            sx={{ mr: 1 }}
-          >
-            전송
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            sx={{ width: 120 }}
-            onClick={handleClickOpen}
-          >
-            승인 수정
-          </Button>
         </CardContent>
       </Card>
       <Dialog open={open} onClose={handleClose}>

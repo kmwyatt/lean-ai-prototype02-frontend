@@ -47,6 +47,66 @@ function AdminMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
+              to="/main/projectlist"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="데이터 검수" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
+              to="/main/checkedupload"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="검수완료 데이터 업로드" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
+              to="/main/work"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="검수 현황" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
+              to="/main/mypage"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="회원 정보" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
               to="/main/notice"
               style={{
                 textDecoration: 'none',

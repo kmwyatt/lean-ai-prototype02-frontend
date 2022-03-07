@@ -40,7 +40,7 @@ function Header(props) {
   const [alertCount, setAlertCount] = useState(0)
   const [alertContent, setAlertContent] = useState([])
   const [profileColor, setProfileColor] = useState('gray')
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
 
   useEffect(() => {
     if (userState.role === 1) {
@@ -75,9 +75,6 @@ function Header(props) {
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
-
-  console.log(userState)
-  console.log(alertCount)
 
   const logoutHandler = () => {
     logout(userDispatch)

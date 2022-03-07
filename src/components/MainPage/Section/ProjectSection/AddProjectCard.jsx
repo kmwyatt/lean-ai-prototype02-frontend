@@ -62,7 +62,9 @@ function AddProjectCard(props) {
     setOpen(false)
   }
 
-  const submitHandler = async () => {
+  // @ts-ignore
+  const submitHandler = async (event) => {
+    event.preventDefault()
     if (file) {
       const formData = new FormData()
       // @ts-ignore

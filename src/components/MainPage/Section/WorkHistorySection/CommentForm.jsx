@@ -62,7 +62,7 @@ function CommentForm(props) {
   const [dataNum, setDataNum] = useState('')
   const [file, setFile] = useState(undefined)
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true)
