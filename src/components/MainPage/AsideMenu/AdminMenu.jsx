@@ -77,6 +77,21 @@ function AdminMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
+              to="/main/datalist"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="검수완료 데이터" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
               to="/main/work"
               style={{
                 textDecoration: 'none',

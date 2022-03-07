@@ -10,6 +10,7 @@ import WorkerMenu from './AsideMenu/WorkerMenu'
 import CheckDataSection from './Section/CheckDataSection/CheckDataSection'
 import CheckedUploadSection from './Section/CheckedUploadSection/CheckedUploadSection'
 import CheckSection from './Section/CheckSection/CheckSection'
+import DataListSection from './Section/DataListSection/DataListSection'
 import JoinRequestSection from './Section/JoinRequestSection/JoinRequestSection'
 import MyPageSection from './Section/MyPageSection/MyPageSection'
 import NoticeContent from './Section/NoticeSection/NoticeContent'
@@ -52,6 +53,7 @@ function MainPage() {
           path="/main/checkedupload"
           component={CheckedUploadSection}
         />
+        <Route exact path="/main/datalist" component={DataListSection} />
         <Route exact path="/main/mypage" component={MyPageSection} />
         <Route exact path="/main/notice" component={NoticeSection} />
         <Route exact path="/main/noticecontent" component={NoticeContent} />

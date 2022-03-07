@@ -34,7 +34,6 @@ function FeedbackForm(props) {
     } else if (userState.role === 3) {
       setProfileColor('darkgreen')
     }
-    console.log(props.post)
   }, [props])
 
   const [writeComment, setWriteComment] = useState('')
