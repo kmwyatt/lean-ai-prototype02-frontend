@@ -107,6 +107,21 @@ function AdminMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
+              to="/main/ralist"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="RA 관리" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
               to="/main/mypage"
               style={{
                 textDecoration: 'none',

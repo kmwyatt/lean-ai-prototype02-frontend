@@ -19,6 +19,7 @@ import AdminProjectSection from './Section/ProjectSection/AdminProjectSection'
 import CheckerProjectSection from './Section/ProjectSection/CheckerProjectSection'
 import JoinedProjectSection from './Section/ProjectSection/JoinedProjectSection'
 import WorkerProjectSection from './Section/ProjectSection/WorkerProjectSection'
+import RAListSection from './Section/RAListSection/RAListSection'
 import WorkHistorySection from './Section/WorkHistorySection/WorkHistorySection'
 import WorkSection from './Section/WorkSection/WorkSection'
 
@@ -54,6 +55,7 @@ function MainPage() {
           component={CheckedUploadSection}
         />
         <Route exact path="/main/datalist" component={DataListSection} />
+        <Route exact path="/main/ralist" component={RAListSection} />
         <Route exact path="/main/mypage" component={MyPageSection} />
         <Route exact path="/main/notice" component={NoticeSection} />
         <Route exact path="/main/noticecontent" component={NoticeContent} />
