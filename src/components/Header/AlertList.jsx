@@ -4,6 +4,7 @@ import { Box, List } from '@mui/material'
 import React from 'react'
 import CommentAlert from './CommentAlert'
 import FeedbackAlert from './FeedbackAlert'
+import JoinedAlert from './JoinedAlert'
 
 // @ts-ignore
 function AlertList(props) {
@@ -14,6 +15,8 @@ function AlertList(props) {
       return <FeedbackAlert info={alert} />
     } else if (alert.type === 'COMMENT') {
       return <CommentAlert info={alert} />
+    } else if (alert.type === 'JOINED') {
+      return <JoinedAlert info={alert} />
     }
   }
 
