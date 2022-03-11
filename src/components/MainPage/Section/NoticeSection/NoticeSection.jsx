@@ -39,8 +39,15 @@ function NoticeSection(props) {
   }, [state])
 
   return (
-    <Box sx={{ m: 5, width: '100%', position: 'relative' }}>
+    <Box sx={{ m: 5, width: '100%' }}>
       <SectionTitle text="공지사항" />
+      <Box sx={{ display: 'flex', justifyContent: 'right', mb: 2 }}>
+        {userState.role === 3 && (
+          <NoticePlusBtn
+            info={{ writerIndex: userState.index, writerId: userState.id }}
+          />
+        )}
+      </Box>
       <Box>
         <TableContainer component={Paper}>
           <Table>
@@ -78,13 +85,6 @@ function NoticeSection(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <Box sx={{ position: 'absolute', right: 0, mt: 2 }}>
-          {userState.role === 3 && (
-            <NoticePlusBtn
-              info={{ writerIndex: userState.Index, writerId: userState.id }}
-            />
-          )}
-        </Box>
       </Box>
     </Box>
   )

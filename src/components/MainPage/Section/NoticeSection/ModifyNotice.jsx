@@ -8,10 +8,8 @@ import {
   CardContent,
   Typography,
 } from '@mui/material'
-import axios from 'axios'
 import moment from 'moment'
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { useUserState } from '../../../../context/UserContext'
 import SectionTitle from '../../../util/SectionTitle'
 
@@ -19,28 +17,6 @@ import SectionTitle from '../../../util/SectionTitle'
 function NoticeContent(props) {
   const state = props.location.state
   const userState = useUserState()
-
-  const modifyHandler = () => {
-    props.history.push({
-      pathname: '/main/noticemodify',
-      state: {
-        ...state,
-      },
-    })
-  }
-
-  const deleteHandler = async () => {
-    try {
-      const body = {
-        index: state.index,
-      }
-      axios.post('/api/admin/deletenotice', body)
-      alert('삭제되었습니다.')
-      props.history.push('/main/notice')
-    } catch (err) {
-      alert('삭제에 실패했습니다.')
-    }
-  }
 
   return (
     <Box sx={{ m: 5, width: '100%', position: 'relative' }}>
@@ -89,12 +65,12 @@ function NoticeContent(props) {
             </Typography>
           </CardContent>
         </Card>
-        {userState.index === state.writerIndex && (
+        {userState.role === 3 && (
           <Box sx={{ display: 'flex', justifyContent: 'right', my: 1 }}>
-            <Button variant="contained" sx={{ mr: 1 }} onClick={modifyHandler}>
+            <Button variant="contained" sx={{ mr: 1 }}>
               수정하기
             </Button>
-            <Button variant="contained" sx={{ mr: 1 }} onClick={deleteHandler}>
+            <Button variant="contained" sx={{ mr: 1 }}>
               삭제하기
             </Button>
           </Box>
@@ -104,4 +80,4 @@ function NoticeContent(props) {
   )
 }
 
-export default withRouter(NoticeContent)
+export default NoticeContent

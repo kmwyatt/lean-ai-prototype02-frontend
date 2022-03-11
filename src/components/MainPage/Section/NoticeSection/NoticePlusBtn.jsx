@@ -62,7 +62,7 @@ function NoticePlusBtn(props) {
   return (
     <>
       <Button variant="contained" onClick={handleOpen}>
-        작성하기
+        새로 작성하기
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>공지사항 작성</DialogTitle>

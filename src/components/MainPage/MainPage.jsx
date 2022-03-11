@@ -14,6 +14,7 @@ import DataListSection from './Section/DataListSection/DataListSection'
 import JoinRequestSection from './Section/JoinRequestSection/JoinRequestSection'
 import MyPageSection from './Section/MyPageSection/MyPageSection'
 import NoticeContent from './Section/NoticeSection/NoticeContent'
+import NoticeModify from './Section/NoticeSection/NoticeModify'
 import NoticeSection from './Section/NoticeSection/NoticeSection'
 import AdminProjectSection from './Section/ProjectSection/AdminProjectSection'
 import CheckerProjectSection from './Section/ProjectSection/CheckerProjectSection'
@@ -59,6 +60,7 @@ function MainPage() {
         <Route exact path="/main/mypage" component={MyPageSection} />
         <Route exact path="/main/notice" component={NoticeSection} />
         <Route exact path="/main/noticecontent" component={NoticeContent} />
+        <Route exact path="/main/noticemodify" component={NoticeModify} />
         <Route exact path="/main/joinrequest" component={JoinRequestSection} />
       </Switch>
     </Container>
