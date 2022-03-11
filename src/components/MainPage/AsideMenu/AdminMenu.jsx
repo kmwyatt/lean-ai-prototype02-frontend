@@ -122,6 +122,21 @@ function AdminMenu() {
         <ListItem disablePadding>
           <ListItemButton>
             <Link
+              to="/main/point"
+              style={{
+                textDecoration: 'none',
+                width: '100%',
+                color: '#333',
+                textAlign: 'center',
+              }}
+            >
+              <ListItemText primary="포인트 정산" />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <Link
               to="/main/mypage"
               style={{
                 textDecoration: 'none',
